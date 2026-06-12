@@ -1,7 +1,8 @@
 import { Navigate } from 'react-router'
 const IsAuth = ({ children }) => {
-    const checkCookie = document.cookie
-    if (!checkCookie) {
+    const checkToken = localStorage.getItem("token")
+    console.log("from auth checkToken",checkToken)
+    if (!checkToken) {
         return <Navigate to={'/login'} replace />
     }
     else {
