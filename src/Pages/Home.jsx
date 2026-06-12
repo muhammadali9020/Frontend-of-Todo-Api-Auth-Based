@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { GetTodoThunk } from "../Store/AsyncThunk/Todo/TodoGetThunk";
-import Cookies from "js-cookie";
 import {
   DeleteTodoSelector,
   GetTodoSelector,
@@ -26,14 +25,12 @@ const Home = () => {
   const { PostIsLoading } = PostTodoSelector();
   const { DeleteIsLoading } = DeleteTodoSelector();
   const [ThemeToggle, setThemeToggle] = useState(localStorage.getItem("theme"));
-  let count = 0;
-  console.log("rerender from home count:-", (count += 1));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logOut = () => {
     toast.warn("User logout successfully!");
     navigate("/login");
-    Cookies.remove("token");
+    localStorage.clear()
   };
   const deleteTodo = async (id) => {
     await dispatch(TodoDeleteThunk(id));
@@ -55,17 +52,19 @@ const Home = () => {
     if (GetIsError?.msg) {
       toast.error(GetIsError?.msg);
       navigate("/login");
+      localStorage.clear()
     }
   }, [GetIsError?.msg]);
   useEffect(() => {
-    dispatch(GetTodoThunk());
+    console.log(localStorage.getItem("token"))
+     dispatch(GetTodoThunk());
   }, []);
   const updateTodo = (todoInfo) => {
     setShowPopUp(true);
     setTodoInfoForUpdate(todoInfo);
   };
   {
-    ThemeToggle ? localStorage.setItem("theme", "dark") : localStorage.clear();
+    ThemeToggle ? localStorage.setItem("theme", "dark") : localStorage.removeItem("theme");
   }
 
   return (
