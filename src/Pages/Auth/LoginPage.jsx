@@ -28,9 +28,10 @@ const LoginPage = () => {
   };
   useEffect(() => {
     if (data?.success) {
+      localStorage.setItem("token",data.token)
       toast.success(data?.welcome);
       setTimeout(() => {
-        navigate("/");
+        location.replace("/")
       }, 1000);
     }
   }, [data]);
@@ -94,7 +95,7 @@ const LoginPage = () => {
             </div>
             <div className="text-center">
               <button
-                disabled={isLoading}
+                disabled={isLoading||data?.success}
                 className="rounded-2xl my-4 bg-green-400 disabled:bg-green-700 flex justify-center gap-2 items-center hover:bg-green-500 text-white font-bold  hover:bg-green-5400 w-full p-2 "
               >
                 {isLoading ? (
