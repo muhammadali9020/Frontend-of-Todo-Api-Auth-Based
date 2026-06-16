@@ -29,7 +29,7 @@ const TodoList = (props) => {
           checked={isChecked}
           onChange={HandleCheckBox}
         />
-        <div  className="overflow-y-scroll">
+        <div  className="overflow-y-auto">
         <div className="text-md font-bold max-w-50 ">
           {props.text} 
         </div>
