@@ -149,7 +149,7 @@ const Home = () => {
               {GetData?.todos?.length == 0 && (
                 <div className="flex justify-center items-center my-2 m-auto flex-col">
                   <img width={100} src={notepadImage} alt="notepad Image" />
-                  <p className="font-bold">Nor more Tasks 🎉</p>
+                  <p className="font-bold">No more Tasks 🎉</p>
                 </div>
               )}
               {GetIsLoading || DeleteIsLoading || PostIsLoading ? (
